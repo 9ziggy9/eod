@@ -41,8 +41,9 @@ function generatePrime(min, max) {
   let myPrime = -1;
   while (!isPrime(myPrime)) {
     myPrime = randomInteger(min,max);
+    console.assert(isPrime(myPrime), "not prime quite yet...");
   }
-  console.assert(isPrime(myPrime), "why no prime?");
+  console.log("Found prime!", myPrime);
   return myPrime;
 }
 
@@ -62,10 +63,11 @@ function createTrueArray(size) {
 
 // Sieve of Eratosthenes? Lol. Little too far.
 function sievePrimes(min, max) {
-  // let primeArray = new Array(max - min).fill(true); // too much?
   let primeArray = [];
   let isPrimeArr = createTrueArray(max);
-  for (let i = min; i < Math.sqrt(max); i++) {
+  isPrimeArr[0] = false;
+  isPrimeArr[1] = false;
+  for (let i = 2; i < Math.sqrt(max); i++) {
     if (isPrimeArr[i]) {
       for (let n = i ** 2; n < max; n += i) {
 	isPrimeArr[n] = false;
@@ -78,5 +80,5 @@ function sievePrimes(min, max) {
   return primeArray;
 }
 
-let somePrimes = sievePrimes(2,100);
-console.log(somePrimes);
+let sievedPrimes = sievePrimes(52,152);
+console.log(sievedPrimes);
