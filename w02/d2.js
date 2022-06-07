@@ -46,10 +46,31 @@ function generatePrime(min, max) {
   return myPrime;
 }
 
-function generatePrimeArr(min, max) {
+function generatePrimes(size, min, max) {
   let primes = [];
-  for (let i = min; i <= max; i++) {
+  for (let i = 0; i < size; i++) {
     primes.push(generatePrime(min, max));
   }
   return primes;
 }
+
+function createTrueArray(size) {
+  let trueArray = [];
+  for (let i = 0; i < size; i++) trueArray.push(true);
+  return trueArray;
+}
+
+// Sieve of Eratosthenes? Lol. Little too far.
+function sievePrimes(min, max) {
+  // let primeArray = new Array(max - min).fill(true); // too much?
+  let isPrimeArr = createTrueArray(max - min);
+  for (let i = min; i < Math.sqrt(max); i++) {
+    if (isPrimeArr[i]) {
+      for (let n = i ** 2; n < max; n++) {
+	isPrimeArr[n] = false;
+      }
+    }
+  }
+}
+
+sievePrimes(2,100);
