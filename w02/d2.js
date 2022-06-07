@@ -15,6 +15,8 @@
 // Review what you wrote, test the code, refactor.
 
 function isPrime(number) {
+  console.assert(Number.isInteger(number), "That aint no integer");
+  if (!Number.isInteger(number)) return false;
   if (number < 2) return false; // by convention 1, is not prime
   let i = 2;
   while (i < number) if (number % i++ === 0) return false;
@@ -35,7 +37,7 @@ function randomInteger(min, max) {
 }
 
 function generatePrime(min, max) {
-  // just let myPrime; no work. :)
+  // just let myPrime; no work. :) Is undefined < 2?
   let myPrime = -1;
   while (!isPrime(myPrime)) {
     myPrime = randomInteger(min,max);
@@ -51,6 +53,3 @@ function generatePrimeArr(min, max) {
   }
   return primes;
 }
-
-let generatedPrimes = generatePrimeArr(1,100);
-console.log(generatedPrimes);
