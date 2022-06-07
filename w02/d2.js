@@ -63,14 +63,20 @@ function createTrueArray(size) {
 // Sieve of Eratosthenes? Lol. Little too far.
 function sievePrimes(min, max) {
   // let primeArray = new Array(max - min).fill(true); // too much?
-  let isPrimeArr = createTrueArray(max - min);
+  let primeArray = [];
+  let isPrimeArr = createTrueArray(max);
   for (let i = min; i < Math.sqrt(max); i++) {
     if (isPrimeArr[i]) {
-      for (let n = i ** 2; n < max; n++) {
+      for (let n = i ** 2; n < max; n += i) {
 	isPrimeArr[n] = false;
       }
     }
   }
+  for (let i = min; i < max; i++) {
+    if (isPrimeArr[i]) primeArray.push(i);
+  }
+  return primeArray;
 }
 
-sievePrimes(2,100);
+let somePrimes = sievePrimes(2,100);
+console.log(somePrimes);
