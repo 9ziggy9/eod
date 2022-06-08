@@ -58,6 +58,8 @@ function generatePrimes(size, min, max) {
 function createTrueArray(size) {
   let trueArray = [];
   for (let i = 0; i < size; i++) trueArray.push(true);
+  trueArray[0] = false;
+  trueArray[1] = false;
   return trueArray;
 }
 
@@ -65,8 +67,6 @@ function createTrueArray(size) {
 function sievePrimes(min, max) {
   let primeArray = [];
   let isPrimeArr = createTrueArray(max);
-  isPrimeArr[0] = false;
-  isPrimeArr[1] = false;
   for (let i = 2; i < Math.sqrt(max); i++) {
     if (isPrimeArr[i]) {
       for (let n = i ** 2; n < max; n += i) {
