@@ -27,7 +27,7 @@ function rotateRightOnce(arr) {
 // more general case.
 
 function rotateRight(arr, num) {
-  if (num < 1) return;
+  num = Math.abs(num); // bad idea
   while (num) {
     rotateRightOnce(arr);
     num--;
