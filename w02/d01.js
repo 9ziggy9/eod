@@ -1,81 +1,51 @@
-// COUNT SCORES
-
-let peeps = [
-  {name: "Anthony", score: 2},
-  {name: "Winnie", score: 2},
-  {name: "Fred", score: 2},
-  {name: "Winnie", score: 2},
-  {name: "Fred", score: 2},
-  {name: "Anthony", score: 2},
-  {name: "Winnie", score: 2}
-];
-
-function countScores1(people) {
-  let totalScores = {};
-  for (let person of people) {
-    if (totalScores[person.name] === undefined) {
-      totalScores[person.name] = person.score;
-    } else {
-      totalScores[person.name] += person.score;
+function getAverage(nums) {
+    // Your code here
+  	let sum = 0;
+  	
+  	for (let i = 0; i < nums.length; i++) {
+    	num = nums[i];
+      	sum += num
     }
-  }
-  return totalScores;
+  	average = sum / nums.length;
+  	return average;
+};
+
+
+
+function highestAverage(numsList) {
+    // Your code here
+  	let highestAve = getAverage(numsList[0]);
+  	let index = 0;
+  	for (let i = 0; i < numsList.length; i++) {
+    	average = getAverage(numsList[i]);
+      	if (average > highestAve) {
+        	highestAve = average;
+          	index = i;
+        }
+    }
+  	return index;
 }
 
-console.log("countScores1()");
-console.log(countScores1(peeps));
 
-function countScores2(people) {
-  let totalScores = {};
-  people.forEach(person => {
-      if (totalScores[person.name] === undefined) {
-	totalScores[person.name] = person.score;
-      } else {
-	totalScores[person.name] += person.score;
-      };
-  });
-  return totalScores;
-}
 
-console.log("countScores2()");
-console.log(countScores2(peeps));
 
-// Purely functional approach
-// uses "computed property names"
-let countScores3 = (people) => people.reduce((obj,pair) => {
-  if (!obj[pair.name]) return {...obj, [pair.name]: pair.score};
-  return {...obj, [pair.name]: obj[pair.name] + pair.score};
-}, {});
+// TESTS
+// DO NOT MODIFY ANYTHING BELOW THIS LINE
 
-console.log("countScores3()");
-console.log(countScores3(peeps));
+const arrayA = [1, 2, 3, 4, 5];
+const arrayB = [10000, -9998];
+const arrayC = [2, 100, 55, 19];
+const arrayD = [4, 8, 12];
 
-// And if you are insane
-let countScores4 = (people) => people.reduce((obj,pair) => obj[pair.name] ?
-					     {...obj, [pair.name]: obj[pair.name] + pair.score} :
-					     {...obj, [pair.name]: pair.score}, {});
+let score = 0;
 
-console.log("countScores4()");
-console.log(countScores4(peeps));
+if (getAverage(arrayA) === 3) score++;
+if (getAverage(arrayB) === 1) score++;
+if (getAverage(arrayC) === 44) score++;
+if (getAverage(arrayD) === 8) score++;
 
-// Notes on computed property names
-// Syntax to allow us to use variables in object literal declarations
+if (highestAverage([arrayA, arrayB, arrayC, arrayD]) === 2) score++;
+if (highestAverage([arrayA, arrayB]) === 0) score++;
+if (highestAverage([arrayA, arrayD]) === 1) score++;
 
-let myObj1 = {"hello": 30, "world": 41};
-
-// suppose I had some function which programmatically determined which
-// kvp I want to update;
-
-function pickKey() {
-  if (Math.floor(10 * Math.random()) % 2) return "hello";
-  return "world";
-}
-
-myObj1 = {...myObj1, [pickKey()]: 1111};
-// JS smart enough to know if key already exists!
-
-// can even use string templates if we wanted
-myObj1 = {...myObj1, [`new-${pickKey()}`]: 1111};
-// JS smart enough to know if key already exists!
-
-console.log(myObj1);
+console.log("You have scored " + score + "/7 points.");
